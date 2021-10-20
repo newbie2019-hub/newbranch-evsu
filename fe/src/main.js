@@ -27,8 +27,8 @@ Vue.mixin(vresponse)
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 Vue.use(Toast, {
-    position: "top-right",
-    timeout: 3000,
+    position: "top-center",
+    timeout: 2000,
     closeOnClick: true,
     pauseOnFocusLoss: true,
     pauseOnHover: true,
@@ -37,7 +37,7 @@ Vue.use(Toast, {
     closeButton: false,
     icon: true,
     rtl: false,
-    maxToasts: 4,
+    maxToasts: 2,
     transition: "Vue-Toastification__fade",
     newestOnTop: true
 });

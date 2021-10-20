@@ -75,7 +75,7 @@ class UserController extends Controller
             'user_info_id' => $userinfo->id,
         ]);
 
-        return $this->success('Student registered successfully');
+        return $this->success('Student registered successfully and waiting for approval');
     }
     
     public function login(Request $request)
@@ -83,7 +83,7 @@ class UserController extends Controller
         $user = User::where('email', $request->email)->where('account_status', 'pending')->first();
 
         if($user) {
-            return response()->json(['msg' => 'Your account is still pending for apporval'], 403);
+            return response()->json(['msg' => 'Your account is still pending for approval'], 403);
         }
         else
         {
