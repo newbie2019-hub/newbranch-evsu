@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id');
+            $table->string('student_id', 50);
             $table->string('email')->unique();
             $table->string('password');
             $table->foreignId('user_info_id')->constrained()->onDelete('cascade');

@@ -28,7 +28,7 @@
              <td scope="row">{{i + payments.from}}</td>
              <td>{{payment.payment_for}}</td>
              <td>{{payment.user.userinfo.first_name}} {{payment.user.userinfo.last_name}}</td>
-             <td>{{payment.amount}}</td>
+             <td>{{formatCurrency(payment.amount)}}</td>
              <td>{{payment.status}}</td>
              <td>{{payment.instructor}}</td>
              <td v-if="user.userinfo.type == 'admin'">
@@ -56,7 +56,7 @@
    <div class="row pe-4 ps-4 pt-1 pb-2">
      <div class="col">
      <label class="mt-2" for="paymentfor">Select Student</label>
-     <select v-model="data.user_id" class="form-select">
+     <select v-model="data.user_id" class="form-select" size="3" multiple>
       <option v-for="(stud, i) in allmembers" :key="i" :value="stud.id">{{stud.userinfo.first_name}} {{stud.userinfo.last_name}}</option>
      </select>
      <label class="mt-2" for="paymentfor">Payment For</label>
@@ -115,7 +115,7 @@ export default {
  data(){
   return {
    data: {
-    user_id: '',
+    user_id: [],
     payment_for: '',
     amount: '',
     instructor: '',
@@ -128,9 +128,9 @@ export default {
   }
  },
  async mounted() {
+  await this.$store.dispatch('auth/checkUser')
   document.title = 'Payment Records'
   await this.$store.dispatch('members/allMembers')
-  await this.$store.dispatch('auth/checkUser')
   this.getPayments()
   this.$root.$on('bv::modal::show', (modalId) => {
     this.modalId = modalId.componentId
@@ -181,7 +181,14 @@ export default {
     },
     closeModal(){
       this.$bvModal.hide(this.modalId)
-    }
+    },
+    formatCurrency(data) {
+        var formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'PHP',
+        });
+        return formatter.format(data);
+    },
  },
  watch: {
     sort(){

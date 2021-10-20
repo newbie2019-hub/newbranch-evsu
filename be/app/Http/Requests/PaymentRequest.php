@@ -24,7 +24,6 @@ class PaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'bail|required|exists:users,id',
             'payment_for' => 'bail|required|max:200',
             'status' => 'bail|required|max:50',
             'amount' => 'bail|required|max:20',

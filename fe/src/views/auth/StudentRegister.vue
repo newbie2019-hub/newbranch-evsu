@@ -33,14 +33,14 @@
                 />
                 <label for="floatingPassword">Password</label>
               </div>
-              <div class="form-floating">
+              <!-- <div class="form-floating">
                 <select v-model="data.type" class="form-select">
                   <option disabled v-text="disabledOption4"></option>
                   <option value="admin">Org-Admin</option>
                   <option value="student">Org-Member</option>
                 </select>
                 <label>Account Type</label>
-              </div>
+              </div> -->
               <div class="d-flex justify-content-center mt-4">
                 <button
                   href=""
@@ -194,7 +194,7 @@
                 <label>Year Level</label>
               </div>
               <div class="form-floating mb-3">
-                <select v-model="data.section" class="form-select">
+                <select v-model="data.section_id" class="form-select">
                   <option disabled value="" v-text="disabledOption2"></option>
                   <option
                     :value="sec.id"
@@ -206,7 +206,7 @@
                 <label>Section</label>
               </div>
               <div class="form-floating mb-3">
-                <select v-model="data.organization" class="form-select">
+                <select v-model="data.organization_id" class="form-select">
                   <option disabled value="" v-text="disabledOption3"></option>
                   <option
                     :value="org.id"
@@ -262,9 +262,9 @@ export default {
         contact: "",
         year_level: "",
         student_id: "",
-        section: "",
-        organization: "",
-        type: "",
+        section_id: "",
+        organization_id: "",
+        type: "student",
       },
       isLoading: false,
     };
@@ -354,20 +354,14 @@ export default {
         return this.$toast.error("Student ID is required");
       if (this.data.year_level == 0)
         return this.$toast.error("Year level is required");
-      if (this.data.section == 0)
+      if (this.data.section_id == 0)
         return this.$toast.error("Section is required");
-      if (this.data.organization == 0)
+      if (this.data.organization_id == 0)
         return this.$toast.error("Organization is required");
       this.isLoading = true;
-      const res = await this.createAccount(this.data);
-      if (res.status == 200) {
-        this.$router.push("/");
-        this.$toast.success(
-          "Account created successfully!"
-        );
-      } else {
-        this.showError(res.data);
-      }
+      const {data, status} = await this.createAccount(this.data);
+      this.checkStatus(data, status, 'register', '')
+      this.$router.push("/");
     },
     prev() {
       this.step--;
@@ -375,6 +369,9 @@ export default {
     returnLogin() {
       this.$router.push("/");
     },
+    closeModal(){
+      this.$bvModal.hide(this.modalId)
+    }
   },
   watch: {
     "data.birthday": function() {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\UserInfo;
+use App\Http\Requests\StudentsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -51,7 +52,7 @@ class UserController extends Controller
         return response()->json(['success' => 'Account updated successfuly!', 'user' => $user], 200);
     }
 
-    public function store(Request $request)
+    public function store(StudentsRequest $request)
     {
         $userinfo = UserInfo::create([
             'first_name' => $request->first_name,
@@ -63,8 +64,8 @@ class UserController extends Controller
             'type' => $request->type,
             'contact' => $request->contact,
             'year_level' => $request->year_level,
-            'section_id' => $request->section,
-            'organization_id' => $request->organization,
+            'section_id' => $request->section_id,
+            'organization_id' => $request->organization_id,
         ]);
 
         User::create([

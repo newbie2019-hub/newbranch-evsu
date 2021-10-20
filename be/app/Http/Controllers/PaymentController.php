@@ -19,7 +19,7 @@ class PaymentController extends Controller
     }
 
     public function index(Request $request){
-        if(auth()->user()->userinfo->type == 'Admin') {
+        if(auth()->user()->userinfo->type == 'admin') {
             return response()->json(Payment::with(['user','user.userinfo'])->where('organization_id', auth()->user()->userinfo->organization_id)->orderBy('payment_for', $request->sort)->paginate(8));
         }
         else {    
@@ -33,11 +33,13 @@ class PaymentController extends Controller
     }
 
     public function store(PaymentRequest $request){
-        Payment::create($request->validated() + [
-            'organization_id' => auth()->user()->userinfo->organization_id,
-        ]);
+        for ($i = 0; $i < count($request->user_id); $i++){
+            Payment::create($request->validated() + [
+                'organization_id' => auth()->user()->userinfo->organization_id,
+                'user_id' => $request->user_id[$i],
+            ]);
+        }
         return $this->success('Payment record created successfully');
-
     }
 
     public function update(PaymentRequest $request, $id){
