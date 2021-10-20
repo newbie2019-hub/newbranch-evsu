@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('student_id', 50);
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('account_status')->default('pending');
             $table->foreignId('user_info_id')->constrained()->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();

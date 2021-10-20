@@ -98,6 +98,9 @@ export default {
         await this.loginUserAccount(this.data).then((res) => {
           if (res.status == 200) {
             this.$router.push("/user/home");
+          }
+          else if (res.status == 403) {
+            this.$toast.error("Your account is still pending for approval");
           } else {
             this.$toast.error("Invalid Credentials");
           }

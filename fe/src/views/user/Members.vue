@@ -2,8 +2,8 @@
  <div>
   <div class="container pt-5">
    <div class="row ">
-    <h5 class="text-primary">Members</h5>
-    <p class="text-muted">Listed below are the members in your organization</p>
+    <h5 class="text-primary">Official Members</h5>
+    <p class="text-muted">Listed below are the approved members in your organization</p>
     <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11 mt-4">
      <div class="card p-5">
       <div class="d-flex justify-content-end">
@@ -37,6 +37,51 @@
                <div class="d-flex">
                 <a v-on:click.prevent="update_data = JSON.parse(JSON.stringify(stud)); $bvModal.show('updateStudentModal')" href="" class="btn btn-primary btn-sm me-1 rounded-pill"><i class="bi bi-pencil"></i></a>
                 <a v-on:click.prevent="delete_data.id = stud.id; $bvModal.show('deleteStudentModal')" href="" class="btn btn-danger btn-sm rounded-pill"><i class="bi bi-trash"></i></a>
+               </div>
+             </td>
+           </tr>
+         </tbody>
+       </table>
+       </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="container py-5">
+   <div class="row ">
+    <h5 class="text-primary">Pending Accounts</h5>
+    <p class="text-muted">Listed below are the pending accounts registered in your organization</p>
+    <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11 mt-4">
+     <div class="card p-5">
+      <div class="table-responsive mt-4">
+        <table class="table table-striped table-hover">
+         <caption>Showing {{pending_members.from}} to {{pending_members.to}} out of {{pending_members.total}} data</caption>
+         <thead>
+           <tr>
+             <th scope="col">ID</th>
+             <th scope="col" class="text-nowrap">Student ID</th>
+             <th scope="col">Name</th>
+             <th scope="col">Gender</th>
+             <th scope="col">Email</th>
+             <th scope="col">Year</th>
+             <th scope="col">Section</th>
+             <th scope="col" v-if="user.userinfo.type == 'admin'">Action</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr v-for="(pending, i) in pending_members.data" :key="i">
+             <td scope="row">{{i + pending_members.from}}</td>
+             <td>{{pending.student_id}}</td>
+             <td class="text-nowrap">{{pending.userinfo.first_name}} {{pending.userinfo.last_name}}</td>
+             <td>{{pending.userinfo.gender}}</td>
+             <td>{{pending.email}}</td>
+             <td class="text-nowrap">Year Level - {{pending.userinfo.section.year_level}}</td>
+             <td class="text-nowrap">{{pending.userinfo.section.section}}</td>
+             <td v-if="user.userinfo.type == 'admin'" >
+               <div class="d-flex">
+                <a v-on:click.prevent="approve_data.id = pending.id; $bvModal.show('approveStudentModal')" href="" class="btn btn-success btn-sm me-1 rounded-pill"><i class="bi bi-check2"></i></a>
+                <a v-on:click.prevent="update_data = JSON.parse(JSON.stringify(pending)); $bvModal.show('viewStudentModal')" href="" class="btn btn-primary btn-sm me-1 rounded-pill"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a v-on:click.prevent="delete_data.id = pending.id; $bvModal.show('deleteStudentModal')" href="" class="btn btn-danger btn-sm rounded-pill"><i class="bi bi-trash"></i></a>
                </div>
              </td>
            </tr>
@@ -205,12 +250,96 @@
   </template>
   </b-modal>
 
+  <b-modal id="viewStudentModal" scrollable centered title="Student Details">
+   <h6>Account Credentials</h6>
+   <div class="row pb-2">
+     <div class="col-6">
+        <label class="mt-2" for="studentid">Student ID</label>
+        <input disabled v-model="update_data.student_id" id="studentid" type="text" class="form-control" placeholder="">
+     </div>
+     <div class="col-6">
+        <label class="mt-2" for="email">Email</label>
+        <input disabled v-model="update_data.email" id="email" type="text" class="form-control" placeholder="">
+     </div>
+   </div>
+   <h6 class="mt-2">Personal Info</h6>
+   <div class="row">
+     <div class="col-6">
+        <label class="mt-2" for="fname">First Name</label>
+        <input disabled v-model="update_data.userinfo.first_name" id="fname" type="text" class="form-control" placeholder="">
+     </div>
+     <div class="col-6">
+        <label class="mt-2" for="mname">Middle Name</label>
+        <input disabled v-model="update_data.userinfo.middle_name" id="mname" type="text" class="form-control" placeholder="">
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-6">
+        <label class="mt-2" for="lname">Last Name</label>
+        <input disabled v-model="update_data.userinfo.last_name" id="lname" type="text" class="form-control" placeholder="">
+     </div>
+     <div class="col-6">
+        <label class="mt-2" for="mname">Gender</label>
+        <select disabled v-model="update_data.userinfo.gender" id="mname" type="text" class="form-select" placeholder="">
+          <option disabled selected>Please select your gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-6">
+        <label class="mt-2" for="contact">Contact</label>
+        <input disabled v-model="update_data.userinfo.contact" id="contact" type="text" class="form-control" placeholder="">
+     </div>
+     <div class="col-6">
+        <label class="mt-2" for="type">Type</label>
+        <select disabled v-model="update_data.userinfo.type" id="type" type="text" class="form-select" placeholder="">
+          <option disabled selected>Select an account type</option>
+          <option value="admin">Admin</option>
+          <option value="member">Member</option>
+        </select>
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-6">
+        <label class="mt-2" for="yearlevel">Year Level</label>
+        <select disabled v-model="update_data.userinfo.year_level" class="form-select">
+          <option value="I">Year Level - I</option>
+          <option value="II">Year Level -  II</option>
+          <option value="III">Year Level -  III</option>
+          <option value="IV">Year Level - IV</option>
+        </select>
+     </div>
+     <div class="col-6">
+        <label class="mt-2" for="section">Section</label>
+        <select disabled v-model="update_data.userinfo.section_id" id="section" class="form-select" placeholder="">
+          <option :value="sec.id" v-for="(sec, i) in filteredUpdateSection" :key="i" >{{sec.section}}</option>
+        </select>
+     </div>
+
+   </div>
+  <template #modal-footer = {cancel} >
+    <b-button variant="primary" size="sm" @click="cancel()" :disabled="isLoading"> Close </b-button>
+  </template>
+  </b-modal>
+
   <b-modal id="deleteStudentModal" centered title="Confirm Delete">
     <p>Are you sure you want to delete this student? </p>
     <template #modal-footer = {cancel} >
       <b-button variant="primary" size="sm" @click="cancel()" :disabled="isLoading"> Cancel </b-button>
       <b-button variant="success" size="sm" v-on:click.prevent="deleteStudent" :disabled="isLoading">
         Delete
+      </b-button>
+    </template>
+   </b-modal>
+
+  <b-modal id="approveStudentModal" centered title="Confirm Approve">
+    <p>Are you sure you want to appprove this account? </p>
+    <template #modal-footer = {cancel} >
+      <b-button variant="danger" size="sm" @click="cancel()" :disabled="isLoading"> No </b-button>
+      <b-button variant="success" size="sm" v-on:click.prevent="approveStudent" :disabled="isLoading">
+        Yes, approve
       </b-button>
     </template>
    </b-modal>
@@ -233,9 +362,13 @@ export default {
         student_id: '',
         email: '',
         password: '',
+        account_status: 'approved',
       },
       update_data: {
         userinfo: '',
+      },
+      approve_data: {
+        id: ''
       },
       delete_data: {
         id: ''
@@ -248,6 +381,7 @@ export default {
     await this.$store.dispatch('auth/checkUser')
     await this.$store.dispatch('sections/allSections')
     this.getMembers()
+    this.getPendingMembers()
     this.$root.$on('bv::modal::show', (modalId) => {
       this.modalId = modalId.componentId
     })
@@ -265,7 +399,7 @@ export default {
   },
   computed: {
     ...mapState('college', ['allcolleges']),
-    ...mapState('members', ['members']),
+    ...mapState('members', ['members', 'pending_members']),
     ...mapState('auth', ['user']),
     ...mapState('sections', ['allsections']),
     ...mapState('organizations', ['allorganizations']),
@@ -284,6 +418,15 @@ export default {
     async getMembers(page = 1){
       await this.$store.dispatch('members/getMembers', {page: page, sort: this.sort})
     },
+    async getPendingMembers(page = 1){
+      await this.$store.dispatch('members/getPendingMembers', {page: page, sort: this.sort})
+    },
+    async approveStudent(page = 1){
+      this.isLoading = true
+      const { data, status } = await this.$store.dispatch('members/approveMember', this.approve_data)
+      this.checkStatus(data, status, 'update', 'members/getMembers')
+      await this.$store.dispatch('members/getPendingMembers', {page: page, sort: this.sort})
+    },  
     async saveStudent(){
       if(this.data.student_id == '') return this.$toast.error('Student ID is required')
       if(this.data.email == '') return this.$toast.error('Email is required')
@@ -316,12 +459,13 @@ export default {
 
       this.isLoading = true
       const { data, status } = await this.$store.dispatch('members/updateMember', this.update_data)
-      this.checkStatus(data, status, 'update')
+      this.checkStatus(data, status, 'update', '')
     },
-    async deleteStudent(){
+    async deleteStudent(page = 1){
       this.isLoading = true
       const { data, status } = await this.$store.dispatch('members/deleteMember', this.delete_data)
       this.checkStatus(data, status, '', 'members/getMembers')
+      await this.$store.dispatch('members/getPendingMembers', {page: page, sort: this.sort})
     },
     closeModal(){
       this.$bvModal.hide(this.modalId)
@@ -330,6 +474,7 @@ export default {
  watch: {
     sort(){
         this.getMembers()
+        this.getPendingMembers()
     }
   }
 }

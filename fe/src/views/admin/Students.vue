@@ -477,6 +477,7 @@ export default {
         year_level: "I",
         organization_id: "",
         student_id: "",
+        account_status: "approved",
         email: "",
         password: "",
       },
@@ -593,7 +594,7 @@ export default {
         "students/updateStudent",
         this.update_data
       );
-      this.checkStatus(data, status, "update");
+      this.checkStatus(data, status, "update", "");
     },
     async deleteStudent() {
       this.isLoading = true;

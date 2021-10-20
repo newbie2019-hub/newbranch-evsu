@@ -28,7 +28,7 @@ class MembersController extends Controller
             'userinfo.organization:id,organization'
             ])->whereHas('userinfo', function($query){
                 $query->where('organization_id', auth()->user()->userinfo->organization_id);
-            })->where('id', '<>', auth()->user()->id)->get());
+            })->where('id', '<>', auth()->user()->id)->where('account_status', 'approved')->get());
     }
 
     public function index()
@@ -39,7 +39,18 @@ class MembersController extends Controller
             'userinfo.organization:id,organization'
             ])->whereHas('userinfo', function($query){
                 $query->where('organization_id', auth()->user()->userinfo->organization_id);
-            })->where('id', '<>', auth()->user()->id)->paginate(8));
+            })->where('id', '<>', auth()->user()->id)->where('account_status', 'approved')->paginate(8));
+    }
+    
+    public function pendingMembers()
+    {
+        return response()->json(User::with([
+            'userinfo', 
+            'userinfo.section:id,section,year_level', 
+            'userinfo.organization:id,organization'
+            ])->whereHas('userinfo', function($query){
+                $query->where('organization_id', auth()->user()->userinfo->organization_id);
+            })->where('account_status', 'pending')->paginate(8));
     }
 
     /**
@@ -67,6 +78,7 @@ class MembersController extends Controller
             'password' => Hash::make($request->password),
             'student_id' => $request->student_id,
             'user_info_id' => $userinfo->id,
+            'account_status' => $request->account_status,
         ]);
 
         return $this->success('Student created successfully');
@@ -108,6 +120,23 @@ class MembersController extends Controller
         else 
         {
             return $this->error('Student data not found.');
+        }
+    }
+
+    public function approveMember($id)
+    {
+        $member = User::find($id);
+
+        if(!empty($member)){
+            $member->update([
+                'account_status' => 'approved'
+            ]);
+
+            $updated_user = User::with(['userinfo', 'userinfo.section:id,section,year_level', 'userinfo.organization:id,organization'])->find($id);
+            return response()->json([$updated_user, 'msg' => 'Member approved successfully!']);
+        }
+        else{
+            return $this->error('Something went wrong!');
         }
     }
 

@@ -49,6 +49,7 @@ class StudentsController extends Controller
             'password' => Hash::make($request->password),
             'student_id' => $request->student_id,
             'user_info_id' => $userinfo->id,
+            'account_status' => $request->account_status,
         ]);
         return $this->success('Student created successfully');
     }

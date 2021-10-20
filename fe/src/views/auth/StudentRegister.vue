@@ -264,7 +264,7 @@ export default {
         student_id: "",
         section_id: "",
         organization_id: "",
-        type: "student",
+        type: "member",
       },
       isLoading: false,
     };

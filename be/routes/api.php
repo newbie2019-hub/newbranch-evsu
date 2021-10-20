@@ -39,7 +39,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
         Route::post('store', [UserController::class, 'store']);
         Route::post('login', [UserController::class, 'login']);
         Route::post('logout', [UserController::class, 'logout']);
-        Route::put('update/{id}', [UserController::class, 'update']);
+        Route::put('update', [UserController::class, 'update']);
         Route::post('me', [UserController::class, 'me']);
     });
 });
@@ -57,7 +57,9 @@ Route::group(['middleware' => 'api'], function (){
 
     Route::group(['prefix' => 'user'], function (){
         Route::get('members/all', [MembersController::class, 'showall']);
+        Route::get('pendingmembers', [MembersController::class, 'pendingMembers']);
         Route::apiResource('members', MembersController::class);
+        Route::put('approve/{id}', [MembersController::class, 'approveMember']);
         Route::get('announcement/all', [AnnouncementController::class, 'showall']);
         Route::apiResource('announcement', AnnouncementController::class);
         Route::apiResource('payments', PaymentController::class);

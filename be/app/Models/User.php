@@ -22,7 +22,8 @@ class User extends Authenticatable implements JWTSubject
         'student_id',
         'email',
         'password',
-        'user_info_id'
+        'user_info_id',
+        'account_status'
     ];
 
     public function userinfo(){
