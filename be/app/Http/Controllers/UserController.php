@@ -60,6 +60,7 @@ class UserController extends Controller
             'gender' => $request->gender,
             'birthday' => $request->birthday,
             'age' => $request->age,
+            'type' => $request->type,
             'contact' => $request->contact,
             'year_level' => $request->year_level,
             'section_id' => $request->section,

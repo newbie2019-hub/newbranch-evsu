@@ -205,8 +205,8 @@
             placeholder=""
           >
             <option disabled selected>Select an account type</option>
-            <option value="Admin">Admin</option>
-            <option value="Member">Member</option>
+            <option value="admin">Admin</option>
+            <option value="member">Member</option>
           </select>
         </div>
       </div>
@@ -369,8 +369,8 @@
             placeholder=""
           >
             <option disabled selected>Select an account type</option>
-            <option value="Admin">Admin</option>
-            <option value="Member">Member</option>
+            <option value="admin">Admin</option>
+            <option value="member">Member</option>
           </select>
         </div>
       </div>

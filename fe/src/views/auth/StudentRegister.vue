@@ -35,7 +35,7 @@
               </div>
               <div class="form-floating">
                 <select v-model="data.type" class="form-select">
-                  <option disabled value="" v-text="disabledOption4"></option>
+                  <option disabled v-text="disabledOption4"></option>
                   <option value="admin">Org-Admin</option>
                   <option value="student">Org-Member</option>
                 </select>

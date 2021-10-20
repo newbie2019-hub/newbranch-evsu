@@ -7,7 +7,7 @@
     <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11 mt-4">
      <div class="card p-5">
       <div class="d-flex justify-content-end">
-       <button v-if="user.userinfo.type == 'Admin'" class="btn btn-primary" v-on:click.prevent="$bvModal.show('addMemberModal')"><i class="bi bi-node-plus me-2"></i>Member</button>
+       <button v-if="user.userinfo.type == 'admin'" class="btn btn-primary" v-on:click.prevent="$bvModal.show('addMemberModal')"><i class="bi bi-node-plus me-2"></i>Member</button>
       </div>
       <div class="table-responsive mt-4">
         <table class="table table-striped table-hover">
@@ -21,7 +21,7 @@
              <th scope="col">Email</th>
              <th scope="col">Year</th>
              <th scope="col">Section</th>
-             <th scope="col" v-if="user.userinfo.type == 'Admin'">Action</th>
+             <th scope="col" v-if="user.userinfo.type == 'admin'">Action</th>
            </tr>
          </thead>
          <tbody>
@@ -33,7 +33,7 @@
              <td>{{stud.email}}</td>
              <td class="text-nowrap">Year Level - {{stud.userinfo.section.year_level}}</td>
              <td class="text-nowrap">{{stud.userinfo.section.section}}</td>
-             <td v-if="user.userinfo.type == 'Admin'" >
+             <td v-if="user.userinfo.type == 'admin'" >
                <div class="d-flex">
                 <a v-on:click.prevent="update_data = JSON.parse(JSON.stringify(stud)); $bvModal.show('updateStudentModal')" href="" class="btn btn-primary btn-sm me-1 rounded-pill"><i class="bi bi-pencil"></i></a>
                 <a v-on:click.prevent="delete_data.id = stud.id; $bvModal.show('deleteStudentModal')" href="" class="btn btn-danger btn-sm rounded-pill"><i class="bi bi-trash"></i></a>
@@ -98,8 +98,8 @@
         <label class="mt-2" for="type">Type</label>
         <select v-model="data.type" id="type" type="text" class="form-select" placeholder="">
           <option disabled selected>Select an account type</option>
-          <option value="Admin">Admin</option>
-          <option value="Member">Member</option>
+          <option value="admin">Admin</option>
+          <option value="member">Member</option>
         </select>
      </div>
    </div>
@@ -174,8 +174,8 @@
         <label class="mt-2" for="type">Type</label>
         <select v-model="update_data.userinfo.type" id="type" type="text" class="form-select" placeholder="">
           <option disabled selected>Select an account type</option>
-          <option value="Admin">Admin</option>
-          <option value="Member">Member</option>
+          <option value="admin">Admin</option>
+          <option value="member">Member</option>
         </select>
      </div>
    </div>

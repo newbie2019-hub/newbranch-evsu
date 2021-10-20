@@ -7,7 +7,7 @@
     <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11 mt-4">
      <div class="card p-5">
       <div class="d-flex justify-content-end">
-       <button v-if="user.userinfo.type == 'Admin'" class="btn btn-primary" v-on:click.prevent="$bvModal.show('addAnnouncementModal')"><i class="bi bi-node-plus me-2"></i>Announcement</button>
+       <button v-if="user.userinfo.type == 'admin'" class="btn btn-primary" v-on:click.prevent="$bvModal.show('addAnnouncementModal')"><i class="bi bi-node-plus me-2"></i>Announcement</button>
       </div>
       <div class="table-responsive mt-4">
         <table class="table table-striped table-hover">
@@ -19,7 +19,7 @@
              <th scope="col">Where</th>
              <th scope="col">When</th>
              <th scope="col">Who</th>
-             <th scope="col" v-if="user.userinfo.type == 'Admin'">Action</th>
+             <th scope="col" v-if="user.userinfo.type == 'admin'">Action</th>
            </tr>
          </thead>
          <tbody>
@@ -29,7 +29,7 @@
              <td>{{announcement.where}}</td>
              <td>{{announcement.when}}</td>
              <td>{{announcement.who}}</td>
-             <td v-if="user.userinfo.type == 'Admin'">
+             <td v-if="user.userinfo.type == 'admin'">
                <div class="d-flex">
                 <a v-on:click.prevent="data = {...announcement}; $bvModal.show('updateAnnouncementModal')" href="" class="btn btn-primary btn-sm me-1 rounded-pill"><i class="bi bi-pencil"></i></a>
                 <a v-on:click.prevent="delete_data.id = announcement.id; $bvModal.show('deleteAnnouncementModal')" href="" class="btn btn-danger btn-sm rounded-pill"><i class="bi bi-trash"></i></a>

@@ -20,7 +20,7 @@ class CreateUserInfosTable extends Migration
             $table->string('last_name', 60);
             $table->string('gender', 60);
             $table->string('age', 60)->nullable();
-            $table->string('type', 50)->default('student');
+            $table->string('type');
             $table->string('contact');
             $table->string('birthday')->nullable();
             $table->string('year_level', 10);
