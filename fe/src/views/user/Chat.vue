@@ -11,7 +11,7 @@
                 <div class="bubble-one d-flex justify-content-start my-2">
                     <p class="text-light">aalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuyd</p>
                 </div>
-                <div class="bubble-two d-flex justify-content-end my-2">
+                <div class="bubble-two d-flex justify-content-start my-2">
                     <p class="text-light">aalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuyd</p>
                 </div>
             </div>
@@ -56,6 +56,9 @@ export default {
     left: 0;
     width: 100%;
 }
+.message-container {
+    position: relative;
+}
 .bubble-one{
     height: max-content;
     width: 100% !important;
@@ -67,6 +70,9 @@ export default {
     word-break: break-word !important;
 }
 .bubble-two{
+    position: absolute;
+    right: 0;
+    margin-right: 15px;
     height: max-content;
     width: 100% !important;
     max-width: 500px;
