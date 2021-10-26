@@ -7,9 +7,10 @@
     <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11 mt-4">
      <div class="card p-5">
       <div class="d-flex justify-content-end">
-       <button v-if="user.userinfo.type == 'admin'" class="btn btn-primary" v-on:click.prevent="$bvModal.show('addPaymentModal')"><i class="bi bi-node-plus me-2"></i>Payment</button>
+       <button v-if="user.userinfo.type == 'admin'" class="btn btn-primary" v-on:click.prevent="$bvModal.show('addPaymentModal')"><i class="bi bi-node-plus me-2"></i>Add Payment</button>
       </div>
-      <div class="table-responsive mt-4">
+      <h5 class="text-center" v-if="payments.data.length == 0">No payment record found</h5>
+      <div class="table-responsive mt-4" v-if="payments.data.length > 0">
         <table class="table table-striped table-hover">
          <caption>Showing {{payments.from}} to {{payments.to}} out of {{payments.total}} data</caption>
          <thead>
@@ -56,6 +57,8 @@
    <div class="row pe-4 ps-4 pt-1 pb-2">
      <div class="col">
      <label class="mt-2" for="paymentfor">Select Student</label>
+     <br>
+     <small>CTRL + click on student name to select multiple user</small>
      <select v-model="data.user_id" class="form-select" size="3" multiple>
       <option v-for="(stud, i) in allmembers" :key="i" :value="stud.id">{{stud.userinfo.first_name}} {{stud.userinfo.last_name}}</option>
      </select>
@@ -82,6 +85,7 @@
     <div class="col">
      <label class="mt-2" for="remarks">Payment For</label>
      <textarea v-model="data.payment_for" id="remarks" type="text" class="form-control" placeholder="" aria-label="What"></textarea>
+     
       <label class="mt-2" for="amount">Amount</label>
      <input v-model="data.amount" id="amount" type="number" class="form-control" placeholder="" aria-label="Amount"/>
      <label class="mt-2" for="status">Status</label>
