@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\MembersController;
@@ -44,6 +45,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     });
 });
 Route::group(['middleware' => 'api'], function (){
+
+    Route::apiResource('message', ChatController::class);
+
     Route::group(['prefix' => 'admin'], function (){
         Route::get('college/all', [CollegeController::class, 'showall']);
         Route::apiResource('college', CollegeController::class);
