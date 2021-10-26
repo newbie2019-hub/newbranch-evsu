@@ -6,6 +6,7 @@
     <router-view name="members"/>
     <router-view name="payment"/>
     <router-view name="userannouncement"/>
+    <router-view name="chat"/>
    </div>
  </div>
 </template>

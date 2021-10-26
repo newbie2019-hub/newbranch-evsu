@@ -7,9 +7,10 @@
     <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11 mt-4">
      <div class="card p-5">
       <div class="d-flex justify-content-end">
-       <button v-if="user.userinfo.type == 'admin'" class="btn btn-primary" v-on:click.prevent="$bvModal.show('addAnnouncementModal')"><i class="bi bi-node-plus me-2"></i>Announcement</button>
+       <button v-if="user.userinfo.type == 'admin'" class="btn btn-primary" v-on:click.prevent="$bvModal.show('addAnnouncementModal')"><i class="bi bi-node-plus me-2"></i>Add Announcement</button>
       </div>
-      <div class="table-responsive mt-4">
+      <h5 class="text-center" v-if="announcements.data.length == 0">No announcement found</h5>
+      <div class="table-responsive mt-4" v-if="announcements.data.length > 0">
         <table class="table table-striped table-hover">
          <caption>Showing {{announcements.from}} to {{announcements.to}} out of {{announcements.total}} data</caption>
          <thead>

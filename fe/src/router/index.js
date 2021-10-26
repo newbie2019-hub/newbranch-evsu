@@ -15,6 +15,7 @@ import Index from "../views/user/Index.vue";
 import Members from "../views/user/Members.vue";
 import Payments from "../views/user/Payments.vue";
 import UserAnnouncement from "../views/user/UserAnnouncement.vue";
+import UserChat from "../views/user/Chat.vue";
 
 Vue.use(VueRouter);
 
@@ -129,6 +130,13 @@ const routes = [{
                 name: "userannouncement",
                 components: {
                     userannouncement: UserAnnouncement,
+                },
+            },
+            {
+                path: "chat",
+                name: "chat",
+                components: {
+                    chat: UserChat,
                 },
             },
         ],

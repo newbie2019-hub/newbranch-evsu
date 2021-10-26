@@ -7,9 +7,10 @@
     <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11 mt-4">
      <div class="card p-5">
       <div class="d-flex justify-content-end">
-       <button v-if="user.userinfo.type == 'admin'" class="btn btn-primary" v-on:click.prevent="$bvModal.show('addMemberModal')"><i class="bi bi-node-plus me-2"></i>Member</button>
+       <button v-if="user.userinfo.type == 'admin'" class="btn btn-primary" v-on:click.prevent="$bvModal.show('addMemberModal')"><i class="bi bi-node-plus me-2"></i>Add Member</button>
       </div>
-      <div class="table-responsive mt-4">
+      <h5 class="text-center" v-if="members.data.length == 0">No member found</h5>
+      <div class="table-responsive mt-4" v-if="members.data.length > 0">
         <table class="table table-striped table-hover">
          <caption>Showing {{members.from}} to {{members.to}} out of {{members.total}} data</caption>
          <thead>
@@ -53,7 +54,8 @@
     <p class="text-muted">Listed below are the pending accounts registered in your organization</p>
     <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11 mt-4">
      <div class="card p-5">
-      <div class="table-responsive mt-4">
+      <h5 class="text-center" v-if="pending_members.data.length == 0">No pending account to approve</h5>
+      <div class="table-responsive mt-4" v-if="pending_members.data.length > 0">
         <table class="table table-striped table-hover">
          <caption>Showing {{pending_members.from}} to {{pending_members.to}} out of {{pending_members.total}} data</caption>
          <thead>
