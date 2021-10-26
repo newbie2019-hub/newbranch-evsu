@@ -8,16 +8,16 @@
      <div class="card p-0 mt-4">
          <div class="user-chatbox-container">
             <div class="message-container p-3">
-                <div class="bubble-one d-flex justify-content-start">
-                    <p class="text-wrap">asdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuyd</p>
+                <div class="bubble-one d-flex justify-content-start my-2">
+                    <p class="text-light">aalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuyd</p>
                 </div>
-                <div class="bubble-two d-flex justify-content-end">
-
+                <div class="bubble-two d-flex justify-content-end my-2">
+                    <p class="text-light">aalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuyd</p>
                 </div>
             </div>
              <div class="user-chatbox-message d-flex justify-content-center pb-3">
-                 <input class="form-control ms-3 shadow-none" />
-                 <button class="btn btn-primary ms-2 me-3">Send</button>
+                 <input class="form-control ms-3 shadow-none" placeholder="Type your message here ..."/>
+                 <button class="btn btn-primary ms-2 me-3 rounded-circle"><i class="bi bi-telegram fs-5"></i></button>
              </div>
          </div>
      </div>
@@ -57,14 +57,23 @@ export default {
     width: 100%;
 }
 .bubble-one{
-    position: relative;
     height: max-content;
     width: 100% !important;
     max-width: 500px;
     padding: 10px 15px;
-    background-color: aqua;
+    background-color: rgb(112, 197, 197);
     min-height: 2rem;
     border-radius: 10px;
-    word-wrap: break-word !important;
+    word-break: break-word !important;
+}
+.bubble-two{
+    height: max-content;
+    width: 100% !important;
+    max-width: 500px;
+    padding: 10px 15px;
+    background-color: rgb(80, 231, 156);
+    min-height: 2rem;
+    border-radius: 10px;
+    word-break: break-word !important;
 }
 </style>
