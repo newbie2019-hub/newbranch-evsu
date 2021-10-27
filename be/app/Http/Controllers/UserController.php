@@ -48,7 +48,7 @@ class UserController extends Controller
 
         User::where('id', $id)->update($user);
 
-        $user = User::with(['info'])->where('id', $id)->first();
+        $user = User::with(['userinfo'])->where('id', $id)->first();
         return response()->json(['success' => 'Account updated successfuly!', 'user' => $user], 200);
     }
 

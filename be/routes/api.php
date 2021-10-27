@@ -57,6 +57,8 @@ Route::group(['middleware' => 'api'], function (){
         Route::apiResource('students', StudentsController::class);
         Route::get('sections/all', [SectionsController::class, 'showall']);
         Route::apiResource('sections', SectionsController::class);
+        Route::get('pendingstudents', [StudentsController::class, 'pendingStudents']);
+        Route::put('approve/{id}', [StudentsController::class, 'approveStudent']);
     });
 
     Route::group(['prefix' => 'user'], function (){

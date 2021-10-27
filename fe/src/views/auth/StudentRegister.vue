@@ -33,14 +33,14 @@
                 />
                 <label for="floatingPassword">Password</label>
               </div>
-              <!-- <div class="form-floating">
+              <div class="form-floating">
                 <select v-model="data.type" class="form-select">
                   <option disabled v-text="disabledOption4"></option>
                   <option value="admin">Org-Admin</option>
-                  <option value="student">Org-Member</option>
+                  <option value="member">Org-Member</option>
                 </select>
                 <label>Account Type</label>
-              </div> -->
+              </div>
               <div class="d-flex justify-content-center mt-4">
                 <button
                   href=""
@@ -264,7 +264,7 @@ export default {
         student_id: "",
         section_id: "",
         organization_id: "",
-        type: "member",
+        type: "",
       },
       isLoading: false,
     };

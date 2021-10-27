@@ -54,6 +54,32 @@ class StudentsController extends Controller
         return $this->success('Student created successfully');
     }
 
+    public function pendingStudents()
+    {
+        return response()->json(User::with([
+            'userinfo', 
+            'userinfo.section:id,section,year_level', 
+            'userinfo.organization:id,organization'
+            ])->where('account_status', 'pending')->paginate(8));
+    }
+
+    public function approveStudent($id)
+    {
+        $member = User::find($id);
+
+        if(!empty($member)){
+            $member->update([
+                'account_status' => 'approved'
+            ]);
+
+            $updated_user = User::with(['userinfo', 'userinfo.section:id,section,year_level', 'userinfo.organization:id,organization'])->find($id);
+            return response()->json([$updated_user, 'msg' => 'Member approved successfully!']);
+        }
+        else{
+            return $this->error('Something went wrong!');
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
