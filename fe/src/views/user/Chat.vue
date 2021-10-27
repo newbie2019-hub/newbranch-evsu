@@ -12,8 +12,8 @@
     </div>
     <div class="row pe-5 ps-3 g-0 mt-3">
         <div class="users-list col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 p-4">
-            <p class="text-dark text-center mb-5">Administrator</p>
-            <li class="text-dark shadow-none mt-3 fs-5" v-for="(stud, i) in admins" :key="i" :value="stud.id"> <avatar class="me-2" :username="stud.userinfo.first_name + ' ' + stud.userinfo.last_name" :rounded="true" :size="30" :color="'#fff'" :lighten="100"></avatar>{{stud.userinfo.first_name}} {{stud.userinfo.last_name}}</li>
+            <p class="text-dark text-center mb-5">{{user.userinfo.first_name}} {{user.userinfo.last_name}}</p>
+            <li class="text-dark shadow-none mt-1 fs-6" v-for="(stud, i) in admins" :key="i" :value="stud.id"> <avatar class="me-2" :username="stud.userinfo.first_name + ' ' + stud.userinfo.last_name" :rounded="true" :size="30" :color="'#fff'" :lighten="100"></avatar>{{stud.userinfo.first_name}} {{stud.userinfo.last_name}}</li>
         </div>
         <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
         <div class="card p-0">
@@ -82,6 +82,11 @@ export default {
     background-color: rgb(255, 255, 255);
     border: solid #f1f3f4 3px;
     overflow-y: auto;
+}
+.users-list li{
+    background-color: #f1f3f4;
+    border-radius: 20px;
+    padding: 10px 20px;
 }
 .user-chatbox-container {
     min-height: 400px !important;
