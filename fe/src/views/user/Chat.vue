@@ -12,12 +12,12 @@
                     <p class="text-light">aalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuyd</p>
                 </div>
                 <div class="bubble-two d-flex justify-content-start my-2">
-                    <p class="text-light">aalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuyd</p>
+                    <p class="text-light">aalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuydaalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuydaalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuydaalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuydaalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuydaalsidjalksdjlasjdlkajasldkjaslkdjlaksjdlasjdlkasjdlkasjdlkasjdlasjdlaskjdsdasdasdasdasasdasdiugasiuygfasudyfgaudygfayusdcgasyutdfgcasuycgasuycgasuyd</p>
                 </div>
             </div>
              <div class="user-chatbox-message d-flex justify-content-center pb-3">
                  <input class="form-control ms-3 shadow-none" placeholder="Type your message here ..."/>
-                 <button class="btn btn-primary ms-2 me-3 rounded-circle"><i class="bi bi-telegram fs-5"></i></button>
+                 <button class="btn btn-primary ms-2 me-3 shadow-none rounded-circle"><i class="bi bi-telegram fs-5"></i></button>
              </div>
          </div>
      </div>
@@ -58,6 +58,8 @@ export default {
 }
 .message-container {
     position: relative;
+    overflow-y: scroll;
+    height: 320px;
 }
 .bubble-one{
     height: max-content;

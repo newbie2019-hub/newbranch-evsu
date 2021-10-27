@@ -88,7 +88,7 @@ export default {
       if (this.adminlogin) {
         await this.loginAccount(this.data).then((res) => {
           if (res.status == 200) {
-            this.$toast.success("Welcome, User!");
+            this.$toast.success("Welcome, Admin!");
             this.$router.push("/dashboard/home");
           } else {
             this.$toast.error("Invalid Credentials");
@@ -98,6 +98,7 @@ export default {
         await this.loginUserAccount(this.data).then((res) => {
           if (res.status == 200) {
             this.$router.push("/user/home");
+            this.$toast.success(`Welcome, ${res.data.user.email}`);
           }
           else if (res.status == 403) {
             this.$toast.error("Your account is still pending for approval");

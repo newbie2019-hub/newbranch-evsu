@@ -80,7 +80,7 @@ class UserController extends Controller
     
     public function login(Request $request)
     {
-        $user = User::where('email', $request->email)->where('account_status', 'pending')->first();
+        $user = User::with(['userinfo'])->where('email', $request->email)->where('account_status', 'pending')->first();
 
         if($user) {
             return response()->json(['msg' => 'Your account is still pending for approval'], 403);

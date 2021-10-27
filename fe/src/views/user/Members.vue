@@ -48,7 +48,7 @@
     </div>
    </div>
   </div>
-  <div class="container py-5">
+  <div class="container py-5" v-if="user.userinfo.type == 'admin'">
    <div class="row ">
     <h5 class="text-primary">Pending Accounts</h5>
     <p class="text-muted">Listed below are the pending accounts registered in your organization</p>
