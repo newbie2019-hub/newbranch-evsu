@@ -5,7 +5,7 @@
    <router-link to="/user/members"><i class="bi bi-people"></i>Members</router-link>
    <router-link to="/user/announcements"><i class="bi bi-megaphone"></i> Announcements</router-link>
    <router-link to="/user/payments"><i class="bi bi-cash-coin"></i>Payment Records</router-link>
-   <router-link to="/user/chat"><i class="bi bi-chat"></i>Chatbox</router-link>
+   <router-link to="/user/chat"><i class="bi bi-chat-fill"></i>Chatbox</router-link>
    <a href="" v-on:click.prevent="setValues(); $bvModal.show('settingsModal')" ><i class="bi bi-tools"></i> Settings</a>
    <a href="" v-on:click.prevent="$bvModal.show('logoutModal')"><i class="bi bi-x-circle"></i> Log-out</a>
 

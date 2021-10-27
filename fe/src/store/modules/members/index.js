@@ -5,6 +5,7 @@ export default {
     state: {
         allmembers: [],
         members: [],
+        admins: [],
         pending_members: [],
     },
     getters: {
@@ -16,6 +17,9 @@ export default {
         },
         SET_MEMBERS(state, data) {
             state.members = data
+        },
+        SET_ADMINS(state, data) {
+            state.admins = data
         },
         SET_PENDING_MEMBERS(state, data) {
             state.pending_members = data
@@ -49,6 +53,16 @@ export default {
 
             return res;
         },
+        async allAdmins({ commit }) {
+            const res = await API.get(`/user/admins`).then(res => {
+                commit('SET_ADMINS', res.data)
+                return res;
+            }).catch(err => {
+                return err.response
+            })
+
+            return res;
+        },
         async getPendingMembers({ commit }, { page, sort }) {
             const res = await API.get(`/user/pendingmembers?page=${page}&sort=${sort}`).then(res => {
                 commit('SET_PENDING_MEMBERS', res.data)
@@ -69,6 +83,17 @@ export default {
 
             return res;
         },
+
+        async sendMessage({ commit }, payload) {
+            const res = await API.post('message', payload).then(res => {
+                return res;
+            }).catch(err => {
+                return err.response
+            })
+
+            return res;
+        },
+
         async updateMember({ commit }, payload) {
             const res = await API.put(`/user/members/${payload.id}`, payload).then(res => {
                 return res;

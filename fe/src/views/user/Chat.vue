@@ -4,7 +4,13 @@
    <div class="row">
     <h5 class="text-primary">Chat</h5>
     <p class="text-muted">Send a message to your organization admin</p>
-    <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11 mt-4">
+    <div class="col-12 col-sm-12 col-md-3 col-lg-4 col-xl-4 d-block mt-4">
+    <small>Select admin</small>
+    <select class="form-select" v-model="data.receiver_id">
+        <option v-for="(stud, i) in admins" :key="i" :value="stud.id">{{stud.userinfo.first_name}} {{stud.userinfo.last_name}}</option>
+    </select>
+    </div>
+    <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11">
      <div class="card p-0 mt-4">
          <div class="user-chatbox-container">
             <div class="message-container p-3">
@@ -16,8 +22,8 @@
                 </div>
             </div>
              <div class="user-chatbox-message d-flex justify-content-center pb-3">
-                 <input class="form-control ms-3 shadow-none" placeholder="Type your message here ..."/>
-                 <button class="btn btn-primary ms-2 me-3 shadow-none rounded-circle"><i class="bi bi-telegram fs-5"></i></button>
+                 <input v-model="data.message" class="form-control ms-3 shadow-none" placeholder="Type your message here ..."/>
+                 <button class="btn btn-primary ms-2 me-3 shadow-none rounded-circle" @click="sendMessage"><i class="bi bi-telegram fs-5"></i></button>
              </div>
          </div>
      </div>
@@ -30,16 +36,33 @@
 import { mapState } from 'vuex'
 export default {
  data(){
-  return {}
+  return {
+      isLoading: false,
+      data: {
+          receiver_id: '',
+          message: ''
+      }
+  }
  },
  async mounted() {
   await this.$store.dispatch('auth/checkUser')
+  await this.$store.dispatch('members/allAdmins')
   document.title = 'Chat Section'
  },
  computed: {
     ...mapState('auth', ['user']),
+    ...mapState('members', ['admins']),
  },
- methods: {},
+ methods: {
+     async sendMessage(){
+      if(this.data.receiver_id == '') return this.$toast.error('Recepient required')
+      if(this.data.message == '') return this.$toast.error('Message is blank')
+
+      this.isLoading = true
+      const { data, status } = await this.$store.dispatch('members/sendMessage', this.data)
+      this.checkStatus(data, status, '', 'members/allAdmins')
+    },
+ },
  watch: {}
 }
 </script>

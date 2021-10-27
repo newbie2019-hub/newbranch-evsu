@@ -53,6 +53,15 @@ class MembersController extends Controller
             })->where('account_status', 'pending')->paginate(8));
     }
 
+    public function allAdmins()
+    {
+        return response()->json(User::with([
+            'userinfo',
+            ])->whereHas('userinfo', function($query){
+                $query->where('type', 'admin');
+            })->where('id', '<>', auth()->user()->id)->where('account_status', 'approved')->get());
+    }
+
     /**
      * Store a newly created resource in storage.
      *

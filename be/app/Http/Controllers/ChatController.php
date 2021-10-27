@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+    
     public function index()
     {
         $conversations = Conversation::with(['sender', 'messages'])->where('receiver_id', auth()->user()->id)->get();
