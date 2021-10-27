@@ -15,13 +15,13 @@ class UserController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'store']]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $this->validate($request, [
             'first_name' => 'required',
             'middle_name' => 'required',
             'last_name' => 'required',
-            'contact_number' => 'required',
+            'contact' => 'required',
             'gender' => 'required',
         ]);
 
@@ -32,11 +32,11 @@ class UserController extends Controller
             'gender' => $request->gender,
             'age' => $request->age,
             'birthday' => $request->birthday,
-            'type' => $request->type,
-            'contact_number' => $request->contact,
+            'contact' => $request->contact,
         ];
 
-        UserInfo::where('id', $id)->update($userinfo);
+        $uinfo = UserInfo::where('id', $request->id)->first();
+        $uinfo->update($userinfo);
         
         $user = [
             'email' => $request->email
@@ -46,9 +46,10 @@ class UserController extends Controller
             $user['password'] = Hash::make($request->password);
         }
 
-        User::where('id', $id)->update($user);
+        $u = User::where('id', $request->id)->first();
+        $u->update($user);
 
-        $user = User::with(['userinfo'])->where('id', $id)->first();
+        $user = User::with(['userinfo'])->where('id', $request->id)->first();
         return response()->json(['success' => 'Account updated successfuly!', 'user' => $user], 200);
     }
 

@@ -30,6 +30,9 @@
 
      <label for="remarks">Last Name</label>
      <input v-model="data.last_name" id="remarks" type="text" class="form-control" placeholder="" aria-label="Last Name">
+     
+     <label for="remarks">Contact Number</label>
+     <input v-model="data.contact" id="remarks" type="text" class="form-control" placeholder="" aria-label="Contact Number">
 
      <label for="gender">Select Gender</label>
      <select id="gender" v-model="data.gender" class="form-select">
@@ -77,6 +80,7 @@ export default {
         last_name: '',
         gender: '',
         email: '',
+        contact: '',
         password: '',
         confirm_password: '',
       },
@@ -106,7 +110,7 @@ export default {
      this.data.middle_name = this.user.userinfo.middle_name
      this.data.last_name = this.user.userinfo.last_name
      this.data.gender = this.user.userinfo.gender
-     this.data.contact_number = this.user.userinfo.contact_number
+     this.data.contact = this.user.userinfo.contact
      this.data.email = this.user.email
    },
    async updateAccount(){

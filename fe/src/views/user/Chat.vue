@@ -13,7 +13,7 @@
     <div class="row pe-5 ps-3 g-0 mt-3">
         <div class="users-list col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 p-4">
             <p class="text-dark text-center mb-5">{{user.userinfo.first_name}} {{user.userinfo.last_name}}</p>
-            <li class="text-dark shadow-none mt-1 fs-6" v-for="(stud, i) in admins" :key="i" :value="stud.id"> <avatar class="me-2" :username="stud.userinfo.first_name + ' ' + stud.userinfo.last_name" :rounded="true" :size="30" :color="'#fff'" :lighten="100"></avatar>{{stud.userinfo.first_name}} {{stud.userinfo.last_name}}</li>
+            <li v-on:click.prevent="setRecipient(stud.id)" class="cursor-pointer text-dark shadow-none mt-1 fs-6" v-for="(stud, i) in admins" :key="i" :value="stud.id"> <avatar class="me-2" :username="stud.userinfo.first_name + ' ' + stud.userinfo.last_name" :rounded="true" :size="30" :color="'#fff'" :lighten="100"></avatar>{{stud.userinfo.first_name}} {{stud.userinfo.last_name}}</li>
         </div>
         <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
         <div class="card p-0">
@@ -64,6 +64,9 @@ export default {
     ...mapState('members', ['admins']),
  },
  methods: {
+     async getMessages(){
+         const res = await this.$store.dispatch('memebers/getMessages');
+     },
      async sendMessage(){
       if(this.data.receiver_id == '') return this.$toast.error('Recepient required')
       if(this.data.message == '') return this.$toast.error('Message is blank')
@@ -72,6 +75,9 @@ export default {
       const { data, status } = await this.$store.dispatch('members/sendMessage', this.data)
       this.checkStatus(data, status, '', 'members/allAdmins')
     },
+    setRecipient(id){
+        this.data.receiver_id = id
+    }
  },
  watch: {}
 }
