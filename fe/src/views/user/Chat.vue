@@ -5,28 +5,34 @@
     <h5 class="text-primary">Chat</h5>
     <p class="text-muted">Send a message to your organization admin</p>
     <div class="col-12 col-sm-12 col-md-3 col-lg-4 col-xl-4 d-block mt-4">
-    <small>Select admin</small>
+    <!-- <small>Select admin</small>
     <select class="form-select" v-model="data.receiver_id">
         <option v-for="(stud, i) in admins" :key="i" :value="stud.id">{{stud.userinfo.first_name}} {{stud.userinfo.last_name}}</option>
-    </select>
+    </select> -->
     </div>
-    <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11">
-     <div class="card p-0 mt-4">
-         <div class="user-chatbox-container">
-            <div class="message-container p-3">
-                <div class="bubble-one d-flex justify-content-start my-2">
-                    <p class="text-light">Hi!</p>
+    <div class="row pe-5 ps-3 g-0 mt-3">
+        <div class="users-list col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 p-4">
+            <p class="text-dark text-center mb-5">Administrator</p>
+            <li class="text-dark shadow-none mt-3 fs-5" v-for="(stud, i) in admins" :key="i" :value="stud.id"> <avatar class="me-2" :username="stud.userinfo.first_name + ' ' + stud.userinfo.last_name" :rounded="true" :size="30" :color="'#fff'" :lighten="100"></avatar>{{stud.userinfo.first_name}} {{stud.userinfo.last_name}}</li>
+        </div>
+        <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <div class="card p-0">
+            <div class="user-chatbox-container">
+                <div class="message-container p-3">
+                    <div class="bubble-one d-flex justify-content-start my-2">
+                        <p class="text-light">Hi!</p>
+                    </div>
+                    <div class="bubble-two d-flex justify-content-start my-2">
+                        <p class="text-light">Hello!</p>
+                    </div>
                 </div>
-                <div class="bubble-two d-flex justify-content-start my-2">
-                    <p class="text-light">Hello!</p>
+                <div class="user-chatbox-message d-flex justify-content-center pb-3">
+                    <input v-model="data.message" class="form-control ms-3 shadow-none" placeholder="Type your message here ..."/>
+                    <button class="btn btn-primary ms-2 me-3 shadow-none rounded-circle" @click="sendMessage"><i class="bi bi-telegram fs-5"></i></button>
                 </div>
             </div>
-             <div class="user-chatbox-message d-flex justify-content-center pb-3">
-                 <input v-model="data.message" class="form-control ms-3 shadow-none" placeholder="Type your message here ..."/>
-                 <button class="btn btn-primary ms-2 me-3 shadow-none rounded-circle" @click="sendMessage"><i class="bi bi-telegram fs-5"></i></button>
-             </div>
-         </div>
-     </div>
+        </div>
+        </div>
     </div>
    </div>
   </div>
@@ -34,7 +40,11 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import Avatar from 'vue-avatar' 
 export default {
+  components: {
+    Avatar
+  },
  data(){
   return {
       isLoading: false,
@@ -67,6 +77,12 @@ export default {
 }
 </script>
 <style>
+.users-list {
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border: solid #f1f3f4 3px;
+    overflow-y: auto;
+}
 .user-chatbox-container {
     min-height: 400px !important;
     max-height: 400px !important;
@@ -81,7 +97,7 @@ export default {
 }
 .message-container {
     position: relative;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 320px;
 }
 .bubble-one{
