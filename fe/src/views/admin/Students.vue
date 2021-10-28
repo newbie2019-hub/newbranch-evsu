@@ -3,7 +3,7 @@
     <div class="container pt-5">
       <div class="row ">
         <h5 class="">Students</h5>
-        <p class="text-muted">Manage the students registered on the system</p>
+        <p class="text-muted">Manage officially students registered on the system</p>
         <div class="col-12 col-sm-11 col-md-12 col-lg-11 col-xl-11 mt-4">
           <div class="card p-5">
             <div class="d-flex justify-content-end">
@@ -14,6 +14,7 @@
                 <i class="bi bi-node-plus me-2"></i>Student
               </button>
             </div>
+           <h5 class="text-center" v-if="students.data.length == 0">No accounts found</h5>
             <b-skeleton-table
               :rows="6"
               :columns="8"
@@ -21,7 +22,7 @@
               class="mt-4"
               v-if="initialLoading"
             ></b-skeleton-table>
-            <div class="table-responsive mt-4" v-else>
+            <div class="table-responsive mt-4" v-if="students.data.length > 0">
               <table class="table table-striped table-hover">
                 <caption>
                   Showing

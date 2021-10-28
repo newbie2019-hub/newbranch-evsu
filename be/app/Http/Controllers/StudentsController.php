@@ -22,7 +22,7 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        return response()->json(User::with(['userinfo', 'userinfo.section:id,section,year_level', 'userinfo.organization:id,organization'])->paginate(8));
+        return response()->json(User::with(['userinfo', 'userinfo.section:id,section,year_level', 'userinfo.organization:id,organization'])->where('account_status', 'approved')->paginate(8));
     }
 
     /**
