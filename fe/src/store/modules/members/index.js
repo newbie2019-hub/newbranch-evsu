@@ -7,6 +7,7 @@ export default {
         members: [],
         admins: [],
         pending_members: [],
+        messages: [],
     },
     getters: {
 
@@ -31,6 +32,10 @@ export default {
                 }
             }
         },
+
+        SET_MESSAGES(state, data){
+            state.messages = data
+        }
     },
     actions: {
         async allMembers({ commit }) {
@@ -86,6 +91,17 @@ export default {
 
         async sendMessage({ commit }, payload) {
             const res = await API.post('message', payload).then(res => {
+                return res;
+            }).catch(err => {
+                return err.response
+            })
+
+            return res;
+        },
+
+        async requestMessages({ commit }, data) {
+            const res = await API.post('conversation/messages', data).then(res => {
+                commit('SET_MESSAGES', res.data)
                 return res;
             }).catch(err => {
                 return err.response

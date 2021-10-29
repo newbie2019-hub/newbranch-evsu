@@ -167,3 +167,7 @@ nav ul li a:hover {
 h5 {
     color: maroon !important;
 }
+
+.recipient-active {
+    box-shadow: 0px 0px 10px rgb(64, 114, 223);
+}

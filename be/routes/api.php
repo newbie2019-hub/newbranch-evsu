@@ -46,6 +46,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 });
 Route::group(['middleware' => 'api'], function (){
 
+    Route::post('conversation/messages', [ChatController::class, 'messages']);
     Route::apiResource('message', ChatController::class);
 
     Route::group(['prefix' => 'admin'], function (){

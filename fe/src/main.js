@@ -7,7 +7,13 @@ import Toast from "vue-toastification";
 import VueFileAgent from 'vue-file-agent';
 import DatePicker from 'vue2-datepicker';
 import 'vue-file-agent/dist/vue-file-agent.css';
+ 
+import VueSocketIOExt from 'vue-socket.io-extended';
+import { io } from 'socket.io-client';
 
+const socket = io('http://localhost:3000'); //SOCKETIO SERVER URL
+
+Vue.use(VueSocketIOExt, socket);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueFileAgent)

@@ -55,11 +55,18 @@ class MembersController extends Controller
 
     public function allAdmins()
     {
-        return response()->json(User::with([
-            'userinfo',
-            ])->whereHas('userinfo', function($query){
-                $query->where('type', 'admin');
-            })->where('id', '<>', auth()->user()->id)->where('account_status', 'approved')->get());
+        if(auth()->user()->userinfo->type == 'member'){
+            return response()->json(User::with(['userinfo',])->whereHas('userinfo', function($query){
+                    $query->where('type', 'admin')
+                    ->where('organization_id', auth()->user()->userinfo->organization_id);
+                })->where('id', '<>', auth()->user()->id)->where('account_status', 'approved')->get());
+        }
+        else {
+            return response()->json(User::with(['userinfo'])->whereHas('userinfo', function($query){
+                    $query->where('type', 'member')
+                    ->where('organization_id', auth()->user()->userinfo->organization_id);
+                })->where('id', '<>', auth()->user()->id)->where('account_status', 'approved')->get());
+        }
     }
 
     /**

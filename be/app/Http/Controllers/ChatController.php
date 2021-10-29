@@ -13,15 +13,26 @@ class ChatController extends Controller
         $this->middleware('auth:api');
     }
     
-    public function index()
+    public function messages(Request $request)
     {
-        $conversations = Conversation::with(['sender', 'messages'])->where('receiver_id', auth()->user()->id)->get();
+        $conversations = Conversation::with(['sender', 'messages'])->where('receiver_id', $request->receiver_id)->orWhere('sender_id', $request->receiver_id)->first();
         return response()->json($conversations);
     }
+    // public function index()
+    // {
+    //     $conversations = Conversation::with(['sender', 'messages'])->where('sender_id', auth()->user()->id)->get();
+    //     return response()->json($conversations);
+    // }
 
     public function store(Request $request)
     {
-        $conversation = Conversation::where('sender_id', auth()->user()->id)->where('receiver_id', auth()->user()->id)->first();
+        if(auth()->user()->userinfo->type == 'admin'){
+            $conversation = Conversation::where('receiver_id', auth()->user()->id)->where('sender_id', $request->receiver_id)->first();
+        }
+        else {
+            $conversation = Conversation::where('sender_id', auth()->user()->id)->where('receiver_id', $request->receiver_id)->first();
+        }
+        // return response()->json($conversation);
         if(empty($conversation)){
             $conv = Conversation::create([
                 'sender_id' => auth()->user()->id,
