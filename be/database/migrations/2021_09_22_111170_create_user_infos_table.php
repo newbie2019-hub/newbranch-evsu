@@ -24,6 +24,7 @@ class CreateUserInfosTable extends Migration
             $table->string('contact');
             $table->string('birthday')->nullable();
             $table->string('year_level', 10);
+            $table->string('academic_year', 20);
             $table->foreignId('section_id')->constrained()->onDelete('cascade');
             $table->foreignId('organization_id')->constrained()->onDelete('cascade');
             $table->timestamps();

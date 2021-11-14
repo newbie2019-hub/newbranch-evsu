@@ -78,6 +78,7 @@ class MembersController extends Controller
             'contact' => $request->contact,
             'type' => $request->type,
             'year_level' => $request->year_level,
+            'academic_year' => $request->acad_year,
             'section_id' => $request->section_id,
             'organization_id' => auth()->user()->userinfo->organization_id,
         ]);
@@ -113,6 +114,7 @@ class MembersController extends Controller
                 'gender' => $request->userinfo['gender'],
                 'contact' => $request->userinfo['contact'],
                 'type' => $request->userinfo['type'],
+                'academic_year' => $request->userinfo['acad_year'],
                 'year_level' => $request->userinfo['year_level'],
                 'section_id' => $request->userinfo['section_id'],
                 'organization_id' => $request->userinfo['organization_id'],

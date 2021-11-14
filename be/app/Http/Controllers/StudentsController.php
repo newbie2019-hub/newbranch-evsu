@@ -42,6 +42,7 @@ class StudentsController extends Controller
             'type' => $request->type,
             'year_level' => $request->year_level,
             'section_id' => $request->section_id,
+            'academic_year' => $request->acad_year,
             'organization_id' => $request->organization_id,
         ]);
         User::create([
@@ -100,6 +101,7 @@ class StudentsController extends Controller
                 'gender' => $request->userinfo['gender'],
                 'contact' => $request->userinfo['contact'],
                 'type' => $request->userinfo['type'],
+                'academic_year' => $request->userinfo['acad_year'],
                 'year_level' => $request->userinfo['year_level'],
                 'section_id' => $request->userinfo['section_id'],
                 'organization_id' => $request->userinfo['organization_id'],
