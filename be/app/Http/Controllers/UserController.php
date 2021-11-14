@@ -119,7 +119,7 @@ class UserController extends Controller
 
     public function me()
     {
-        $account = User::with(['userinfo'])->where('id', auth('api')->user()->id)->first();
+        $account = User::with(['userinfo', 'userinfo.organization:id,organization'])->where('id', auth('api')->user()->id)->first();
         return response()->json($account);
     }
 }
