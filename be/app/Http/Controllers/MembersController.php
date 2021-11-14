@@ -49,7 +49,7 @@ class MembersController extends Controller
             'userinfo.section:id,section,year_level', 
             'userinfo.organization:id,organization'
             ])->whereHas('userinfo', function($query){
-                $query->where('organization_id', auth()->user()->userinfo->organization_id);
+                $query->where('organization_id', auth()->user()->userinfo->organization_id)->where('type', 'member');
             })->where('account_status', 'pending')->paginate(8));
     }
 

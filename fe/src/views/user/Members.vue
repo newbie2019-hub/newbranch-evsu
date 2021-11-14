@@ -124,7 +124,7 @@
           <td class="text-nowrap">{{ pending.userinfo.first_name }} {{ pending.userinfo.last_name }}</td>
           <td>{{ pending.userinfo.gender }}</td>
           <td>{{ pending.email }}</td>
-          <td>S.Y. {{ stud.userinfo.academic_year }}</td>
+          <td>S.Y. {{ pending.userinfo.academic_year }}</td>
           <td class="text-nowrap">Year Level - {{ pending.userinfo.section.year_level }}</td>
           <td class="text-nowrap">{{ pending.userinfo.section.section }}</td>
           <td v-if="user.userinfo.type == 'admin'">

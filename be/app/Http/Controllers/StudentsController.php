@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Builder;
 
 class StudentsController extends Controller
 {
@@ -57,7 +58,9 @@ class StudentsController extends Controller
 
     public function pendingStudents()
     {
-        return response()->json(User::with([
+        return response()->json(User::whereHas('userinfo', function (Builder $query) {
+            $query->where('type', 'admin');
+        })->with([
             'userinfo', 
             'userinfo.section:id,section,year_level', 
             'userinfo.organization:id,organization'
