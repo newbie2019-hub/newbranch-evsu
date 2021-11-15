@@ -31,6 +31,7 @@ class UserController extends Controller
             'last_name' => $request->last_name,
             'gender' => $request->gender,
             'age' => $request->age,
+            'academic_year' => $request->acad_year,
             'birthday' => $request->birthday,
             'contact' => $request->contact,
         ];
@@ -65,6 +66,7 @@ class UserController extends Controller
             'type' => $request->type,
             'contact' => $request->contact,
             'year_level' => $request->year_level,
+            'academic_year' => $request->acad_year,
             'section_id' => $request->section_id,
             'organization_id' => $request->organization_id,
         ]);
@@ -117,7 +119,7 @@ class UserController extends Controller
 
     public function me()
     {
-        $account = User::with(['userinfo'])->where('id', auth('api')->user()->id)->first();
+        $account = User::with(['userinfo', 'userinfo.organization:id,organization'])->where('id', auth('api')->user()->id)->first();
         return response()->json($account);
     }
 }
