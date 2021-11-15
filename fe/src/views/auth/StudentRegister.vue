@@ -249,6 +249,7 @@
     this.step++;
    },
    async register() {
+    if (this.data.academic_year == '') return this.$toast.error('Academic year is required');
     this.data.academic_year[1] = this.data.academic_year[1].toString().substring(2);
     this.data.acad_year = this.data.academic_year.join('-');
     if (this.data.student_id == '') return this.$toast.error('Student ID is required');

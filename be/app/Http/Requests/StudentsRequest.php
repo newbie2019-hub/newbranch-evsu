@@ -31,7 +31,6 @@ class StudentsRequest extends FormRequest
             'email' => 'unique:users,email',
             'password' => ['required', Password::min(8)->letters()->mixedCase()->numbers()],
             'first_name' => 'required|bail|max:50',
-            'middle_name' => 'required|bail|max:50',
             'last_name' => 'required|bail|max:50',
             'gender' => 'required|bail|max:15',
             'year_level' => 'required|bail|max:10',
