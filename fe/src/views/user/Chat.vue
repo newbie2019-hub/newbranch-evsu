@@ -32,11 +32,15 @@
                 </div>
             </div>
         </div>
+        <div class="user-chatbox-message d-flex justify-content-center pb-3">
+         <input v-model="data.message" class="form-control ms-3 shadow-none" placeholder="Type your message here ..." v-on:keyup.enter="sendMessage" />
+         <button class="btn btn-primary ms-2 me-3 shadow-none rounded-circle" @click="sendMessage"><i class="bi bi-telegram fs-5"></i></button>
         </div>
+       </div>
+      </div>
+     </div>
     </div>
    </div>
-  </div>
- </div>
 </template>
 <script>
 import { mapState } from 'vuex'
@@ -44,7 +48,7 @@ import Avatar from 'vue-avatar'
 import moment from 'moment'
 export default {
   components: {
-    Avatar
+   Avatar,
   },
   sockets: {
     connect() {
